@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <!-- favicon
+    ============================================ -->		
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    
+    <!-- Google Fonts
+    ============================================ -->		
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+    		<!-- Bootstrap CSS
+		============================================ -->		
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Font awesome CSS
+    ============================================ -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- owl.carousel CSS
+    ============================================ -->
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/owl.theme.css">
+    <link rel="stylesheet" href="css/owl.transitions.css">
+    <!-- nivo slider CSS
+    ============================================ -->
+    <link rel="stylesheet" href="css/nivo-slider.css" type="text/css" />
+    <!-- meanmenu CSS
+    ============================================ -->
+    <link rel="stylesheet" href="css/meanmenu.min.css">
+    <!-- jquery-ui CSS
+    ============================================ -->
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <!-- animate CSS
+    ============================================ -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- main CSS
+    ============================================ -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- style CSS
+    ============================================ -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- responsive CSS
+    ============================================ -->
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <header class="header-area">
+
+    </header>
+    
+    <script type="module">
+        let body = document.querySelector("body");
+        body.style.margin = "0";
+        let rate = 2;
+        let header_area = document.querySelector("header.header-area");
+        import{Header} from './js/modul js/modul_header_js/modul_header.js';
+        let head = new Header(header_area, rate);
+        document.querySelectorAll(".header-area .top-menu .language ul li").forEach((el)=>{
+            el.addEventListener('click',()=>{
+                console.log(head.dataLangCode);
+            })
+        });
+        document.querySelectorAll(".header-area .top-menu .currency ul li").forEach((el)=>{
+            el.addEventListener('click',()=>{
+                console.log(head.dataCurrencyCode);
+            })
+        });
+       
+
+    </script>
+    
+
+</body>
+</html>
