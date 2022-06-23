@@ -5,7 +5,7 @@ class Controller{
        //print_r($_GET);
         if(isset($_GET) && !empty($_GET)){
             //print_r($_GET);
-          if(isset($_GET['all_category'])){
+          if(isset($_GET['all_category']) && isset($_GET['lang']) && $_GET['lang'] != null){
             //print_r($_GET);
             if(!file_exists('controller/CategoryController.php')){
                 die();
@@ -15,7 +15,8 @@ class Controller{
             //print_r($controller);
             if($_GET['all_category'] == 0){
                 // header("Content-type: application/json");
-                $controller->selectAllCategory();
+                $lang = $_GET['lang'];
+                $controller->selectAllCategory($lang);
                 die();
             }
           } 

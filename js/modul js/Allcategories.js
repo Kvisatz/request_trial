@@ -28,7 +28,7 @@ export default class Allcategories{
 
     bigCategories = [];
     //конструктор принимает массив обьектов с бэыка как параметр
-    constructor(mass, selector, lang){  
+    constructor(selector, lang){  
         // console.log(this.arrayCategoriesLang);
         if(lang != undefined){
             // console.log(lang);
@@ -52,13 +52,13 @@ export default class Allcategories{
                 // console.log(this.selector);
                 //this.search(this.selector);
         }
-        if(mass.length > 0){
-            //console.log(JSON.parse(mass));
-            //this.mass = JSON.parse(mass);
-            // console.log(this.mass);
+        // if(mass.length > 0){
+        //     //console.log(JSON.parse(mass));
+        //     //this.mass = JSON.parse(mass);
+        //     // console.log(this.mass);
              
             
-        }
+        // }
         // if(selector != undefined && typeof(selector) == 'string'){
         //     if(document.querySelector(selector) != null){
         //         this.selector = document.querySelector(selector);
@@ -70,10 +70,10 @@ export default class Allcategories{
 
     categoryRequest(){
         let request = new XMLHttpRequest();
-        request.open('POST', `http://localhost/web11-teamwork-js/php/obr.php?all_category=0&lang=${this.categoryLang}`);
+        request.open('POST', `http://localhost/request_trial/php/obr.php?all_category=0&lang=${this.categoryLang}`);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         console.log(request);
-        //request.responseType = 'json';
+        // request.responseType = 'json';
         request.addEventListener('load', ()=>{
             if(request.status == 200 && request.response != 'error'){
                 console.log(typeof(request.response));

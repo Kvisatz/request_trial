@@ -24,8 +24,8 @@
 			return $this->convertData($objQuery);
 		}
 
-		public function selectAllBigCategory(){
-			$sql = 'SELECT id, name_rus FROM `big_categories`';
+		public function selectAllBigCategory($lang){
+			$sql = 'SELECT id, name_'.$lang.' FROM `big_categories`';
 			$objQuery = $this->connect->query($sql);
 			//print_r($objQuery);
 			echo json_encode($this->convertData($objQuery));

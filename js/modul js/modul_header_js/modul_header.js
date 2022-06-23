@@ -37,6 +37,7 @@ export class Header{
         this.links = new Links(this.dataLangCode);
         this.clientSupport = new ClientSupport(this.dataLangCode , this.dataCurrencyCode , this.rate);
         this.renderCat(this.selector, this.dataLangCode);
+        //console.log(this.changeLanguage());
         this.changeLanguage();
         this.changeCurrency();
         
@@ -51,7 +52,7 @@ export class Header{
             }
         }
         //console.log(massRus);
-        new Allcategories(mass5, selector, lang);
+        new Allcategories(selector, lang);
     }
     renderTop(){
         this.selector.innerHTML += `<div class="header-top hidden-xs">
@@ -73,10 +74,16 @@ export class Header{
     }
     changeLanguage(){
         let header = this;
+        //console.log(header);
         this.language.listItem = document.querySelector(".header-area .top-menu .language> li a");
         this.language.langueges = document.querySelectorAll(".header-area .top-menu .language ul li");
+        //console.log(this.language.langueges);
+
         this.language.langueges.forEach((element)=>{
+        console.log(element);
+        console.log(this.language.arrayLangs);
             element.addEventListener('click' , (event)=>{
+                console.log(event);
                 this.language.arrayLangs.forEach((value)=>{
                     if(event.target.getAttribute("data-languageselect") == value.data){
                         header.language.listItem.innerHTML = `<a href="#" data-languageselect = ${value.data}>
