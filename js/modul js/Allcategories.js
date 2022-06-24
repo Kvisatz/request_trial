@@ -26,21 +26,23 @@ export default class Allcategories{
     categoryLang = 'rus';
     arrayCategoriesLangs = arrayCategoriesLangs[0];
 
-    bigCategories = [];
+    supCategories = [];
     //конструктор принимает массив обьектов с бэыка как параметр
     constructor(selector, lang){  
         // console.log(this.arrayCategoriesLang);
         if(lang != undefined){
-            // console.log(lang);
+            //console.log(lang);
             this.categoryLang = lang;
-            //this.languageArrayData(this.categoryLang);
+            console.log(this.categoryLang);
+            this.languageArrayData(this.categoryLang);
             //console.log(this.arrayCategoriesLangs);
         }
         if(selector != null){
                 this.selector = selector;
                 
-                this.categoryRequest();
-                this.render();
+                this.categoryRequest(this.categoryLang, this.selector);
+                //console.log(this.categoryRequest(this.categoryLang, this.selector));
+                //this.render(this.selector, this.categories);
                 // console.log(this.selector);
                 //вызов метода который создает из принятого с бэка массива обьектов экземпляры класса Product
                 //this.productMassiveMaker(this.mass);
@@ -68,42 +70,36 @@ export default class Allcategories{
         // }  
     }
 
-    categoryRequest(){
+    categoryRequest(lang, selector){
+        let backObjMass = [];
         let request = new XMLHttpRequest();
         request.open('POST', `http://localhost/request_trial/php/obr.php?all_category=0&lang=${this.categoryLang}`);
-        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        //request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         console.log(request);
-        // request.responseType = 'json';
+        console.log(lang);
+        request.responseType = 'json';
         request.addEventListener('load', ()=>{
             if(request.status == 200 && request.response != 'error'){
-                console.log(typeof(request.response));
-                let obj = JSON.parse(request.response);
-                console.log(obj);
-                
-                obj.forEach((el)=>{
-                    let name = 'name_'+this.categoryLang;
-                    // let categSet = new Set();
-                    // categSet.add(el[name]);
-                    // console.log(categSet);
-                    
-                    document.querySelector("header").innerHTML += "<p>" + el.name_rus + "<br>" + "</p>";
-                });
+                if(request.response != null){
+                    this.categories = request.response;
+                    this.render(this.selector, this.categories);
+                }
             }
             else{
                 console.log("error");
-                document.querySelector("header").innerHTML += "<p>По вашему запросу категории не найдены</p>";
+                selector.innerHTML += "<p>Категории не найдены</p>";
             }
         });
-       
         request.send();
+        // this.categories = backObj;
     }
-    // languageArrayData(lang){
-    //     for(let arrayCategoriesLang of arrayCategoriesLangs){
-    //         if(arrayCategoriesLang.data == this.categoryLang){
-    //             this.arrayCategoriesLangs = arrayCategoriesLang;
-    //         }
-    //     }
-    // }
+    languageArrayData(lang){
+        for(let arrayCategoriesLang of arrayCategoriesLangs){
+            if(arrayCategoriesLang.data == this.categoryLang){
+                this.arrayCategoriesLangs = arrayCategoriesLang;
+            }
+        }
+    }
 
     // //метод который создает из принятого с бэка массива обьектов экземпляры класса Product
     // productMassiveMaker(mass){
@@ -196,11 +192,10 @@ export default class Allcategories{
     //     }
     //     return categoryMass;
     // }
-    renderBigCategories(selector, categories){
-        
-    }
     render(selector, categories){
-        // console.log(selector);
+        console.log(selector);
+        console.log(categories);
+        console.log(this.arrayCategoriesLangs);
         if(selector != null){
             let str = `<div class="col-md-9 col-sm-12">
                             <div class="quick-access">
@@ -211,7 +206,7 @@ export default class Allcategories{
                                                 str+=this.arrayCategoriesLangs.allcategories;
                                             str += `</option>`;
                                 for(let category of categories){
-                                    // console.log(category);
+                                    console.log(category);
                                     str += `<optgroup class='cate-item-head' label='${category}'></optgroup>`;
                                 
                                 }

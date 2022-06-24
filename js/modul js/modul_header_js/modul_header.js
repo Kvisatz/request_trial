@@ -44,7 +44,7 @@ export class Header{
         
     }
     renderCat(selector, lang){
-        console.log(lang);
+        // console.log(lang);
         selector = selector.querySelectorAll(".header-middle .container .row");
         for(let select of selector){
             if(!select.parentElement.classList.contains("support-client")){
@@ -80,10 +80,7 @@ export class Header{
         //console.log(this.language.langueges);
 
         this.language.langueges.forEach((element)=>{
-        console.log(element);
-        console.log(this.language.arrayLangs);
             element.addEventListener('click' , (event)=>{
-                console.log(event);
                 this.language.arrayLangs.forEach((value)=>{
                     if(event.target.getAttribute("data-languageselect") == value.data){
                         header.language.listItem.innerHTML = `<a href="#" data-languageselect = ${value.data}>
