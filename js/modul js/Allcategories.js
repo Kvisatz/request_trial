@@ -24,6 +24,7 @@ export default class Allcategories{
     //поле класса используется для создания массива экземпляров класса Product
     products = [];
     categoryLang = 'rus';
+    categoryName = '';
     arrayCategoriesLangs = arrayCategoriesLangs[0];
 
     supCategories = [];
@@ -34,40 +35,16 @@ export default class Allcategories{
             //console.log(lang);
             this.categoryLang = lang;
             console.log(this.categoryLang);
+            this.categoryName = 'name_'+lang;
+            console.log(this.categoryName);
             this.languageArrayData(this.categoryLang);
             //console.log(this.arrayCategoriesLangs);
         }
         if(selector != null){
                 this.selector = selector;
-                
+        
                 this.categoryRequest(this.categoryLang, this.selector);
-                //console.log(this.categoryRequest(this.categoryLang, this.selector));
-                //this.render(this.selector, this.categories);
-                // console.log(this.selector);
-                //вызов метода который создает из принятого с бэка массива обьектов экземпляры класса Product
-                //this.productMassiveMaker(this.mass);
-                //вызов метода который перебирает массив Product и по свойству каждого элемента массива создает массив неповторяющихся экземпляров класса Category 
-                //this.categoryList(this.products, this.categories);
-                // console.log(this.products);
-                // console.log(this.categories);
-                // this.render(this.selector, this.categories);
-                // console.log(this.selector);
-                //this.search(this.selector);
         }
-        // if(mass.length > 0){
-        //     //console.log(JSON.parse(mass));
-        //     //this.mass = JSON.parse(mass);
-        //     // console.log(this.mass);
-             
-            
-        // }
-        // if(selector != undefined && typeof(selector) == 'string'){
-        //     if(document.querySelector(selector) != null){
-        //         this.selector = document.querySelector(selector);
-        //         console.log(this.categories);
-        //         this.render(this.selector, this.categories);
-        //     }   
-        // }  
     }
 
     categoryRequest(lang, selector){
@@ -101,97 +78,17 @@ export default class Allcategories{
         }
     }
 
-    // //метод который создает из принятого с бэка массива обьектов экземпляры класса Product
-    // productMassiveMaker(mass){
-    //     for(let mas of mass){
-    //         // console.log(this.categoryLang);
-    //         //console.log(mas);
-    //         for(let objectLang in mas){
-    //         //    console.log(mas[objectLang]);
-    //             if(objectLang == this.categoryLang){
-    //                 // console.log(objectLang);
-    //                 // console.log(this.categoryLang);
-    //                 // console.log(objectLang.category);
-    //                 let product = new Product(mas[objectLang].category, mas[objectLang].supcategory);
-    //                 // console.log(product);
-    //                 this.products.push(product);
-    //             }
-                
-    //         }
-    //         //console.log(mas.this.categoryLang);
-    //         // if(mas != null){
-    //         //     let product = new Product(mas.category, mas.supcategory);
-    //         //     this.products.push(product);
-    //         // }
-    //     }
-    //     return this.products;
-    // }
-    // //метод создания уникальных экземпляров класса Category принимает 
-    // //на входе 2 массива: 1)массив продуктов
-    // //2) массив категорий
-    // //перебирает массив продуктов, проверяет на наличие свойства категории
-    // //если свойство категории обьекта Product задано 
-    // // то проверяет есть ли в массиве категорий соответствующая категория
-    // // если в массиве категорий такой категории нет то она добавляется в массив Other
-    // categoryList(massObj, categoryMass){
-    //     for(let obj of massObj){ 
-    //         if(obj.categoryProduct != undefined){
-    //             // console.log(obj);
-    //             if(categoryMass != undefined){
-    //                 // console.log(obj.categoryProduct);
-    //                 if(!categoryMass.includes(obj.categoryProduct)){
-    //                     categoryMass.push(obj.categoryProduct);    
-    //                 } 
-    //             } 
-    //         }
-    //         else{
-    //                 //console.log(this.categoryLang);
-    //                 obj.categoryProduct = this.arrayCategoriesLangs.other;
-    //                 if(!categoryMass.includes(this.arrayCategoriesLangs.other)){
-    //                     categoryMass.push(this.arrayCategoriesLangs.other);
-    //                 }  
-    //         }   
-    //     }
-    //     // console.log(this.selector);
-    //     this.categories = this.categoryMaker(categoryMass);
-    //     // console.log(categoryMass);
-    //     //return this.categories;
-    // }
 
-    // //метод принимает массив категорий в типе string
-    // //создает экземпляры класса Category для каждого элемента массива
-    // //возвращает массив экземпляров Category 
-    // categoryMaker(categoriesMassStr){
-    //     let massiveCategoryObj = [];
-    //     // console.log(this.categories);
-    //     // console.log(this.selector);
-    //     // console.log(this.selector.children);
-    //     this.render(this.selector, categoriesMassStr);
+    renderCategory(categories){
+        let str = '';
+         for(let category of categories){
+            console.log(category);
+            str += `<optgroup class='cate-item-head' label='${category[this.categoryName]}' id='${category.id}'></optgroup>`;
+        }
+        return str;
+    }
 
-    //     for(let category of categoriesMassStr){
-    //         category = new Category(category, this.categoryProductFilter(this.products, category), this.selector);
-    //         massiveCategoryObj.push(category);
-    //         // console.log(massiveCategoryObj);
-    //     }
-    // //    console.log(massiveCategoryObj);
-    //     return massiveCategoryObj;
-    // }
-    // // метод принимает массив Products и категорию
-    // //сравнивает свойство категории с переданной в метод категорией
-    // //возвращает массив Products котрый относится к переданной категории
-    // categoryProductFilter(productMass, category){
-    //     // console.log(category);
-    //     // console.log(categoryMass);
-    //     let categoryMass = [];
-    //     for(let product of productMass){
-    //        if(product.categoryProduct == category){
-    //             categoryMass.push(product);
-    //             // console.log(categoryMass);
-    //        }
 
-    //     }
-    //     return categoryMass;
-    // }
     render(selector, categories){
         console.log(selector);
         console.log(categories);
@@ -205,11 +102,12 @@ export default class Allcategories{
                                             <option class='all-cate' value = '0'>`;
                                                 str+=this.arrayCategoriesLangs.allcategories;
                                             str += `</option>`;
-                                for(let category of categories){
-                                    console.log(category);
-                                    str += `<optgroup class='cate-item-head' label='${category}'></optgroup>`;
+                                            str += this.renderCategory(this.categories);
+                                // for(let category of categories){
+                                //     console.log(category);
+                                //     str += `<optgroup class='cate-item-head' label='${category[this.categoryName]}' id='${category.id}'></optgroup>`;
                                 
-                                }
+                                // }
                                 str += `</select>
                                     </div>
                                     <div class="header-search">
