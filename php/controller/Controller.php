@@ -16,7 +16,7 @@ class Controller{
             if($_GET['all_category'] == 0){
                 // header("Content-type: application/json");
                 $lang = $_GET['lang'];
-                $controller->selectAllCategory($lang);
+                echo json_encode($controller->selectAllCategory($lang));
                 die();
             }
           } 

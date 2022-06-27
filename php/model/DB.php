@@ -28,7 +28,14 @@
 			$sql = 'SELECT id, name_'.$lang.' FROM `big_categories`';
 			$objQuery = $this->connect->query($sql);
 			//print_r($objQuery);
-			echo json_encode($this->convertData($objQuery));
+			return $this->convertData($objQuery);
+		}
+
+		public function selectAllSupCategory($lang){
+			$sql = 'SELECT id, name_'.$lang.', big_categ_id FROM `sup_categories`';
+			$objQuery = $this->connect->query($sql);
+			//print_r($objQuery);
+			return $this->convertData($objQuery);
 		}
 
 		private function convertData($objQuery){

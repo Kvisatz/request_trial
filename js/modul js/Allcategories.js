@@ -42,8 +42,8 @@ export default class Allcategories{
         }
         if(selector != null){
                 this.selector = selector;
-        
                 this.categoryRequest(this.categoryLang, this.selector);
+                //this.search(this.selector);
         }
     }
 
@@ -79,15 +79,43 @@ export default class Allcategories{
     }
 
 
-    renderCategory(categories){
+    renderBigCategory(categories){
         let str = '';
-         for(let category of categories){
-            console.log(category);
+         for(let category of categories.big_category){
+            //console.log(category);
             str += `<optgroup class='cate-item-head' label='${category[this.categoryName]}' id='${category.id}'></optgroup>`;
+            str += this.renderSupCategory(this.categories, category.id);
         }
         return str;
     }
 
+    renderSupCategory(categories, id){
+
+        let str = '';
+         for(let supcategory of categories.sup_category){
+            if(supcategory.big_categ_id == id){
+                //console.log(supcategory);
+                str += `<option class='c-item' id='${supcategory.id}'>${supcategory[this.categoryName]}</option>`;
+            }
+            
+            // if(supcategory.name != categories.sup_category[0].t){
+            //     str += `<option class='c-item'>${supcategory.name}</option>`;
+            // }
+        }
+        return str;
+
+
+        // let str = `<option class='cate-item-title'>${supcategories[0].name}</option>`;
+            
+        //     for(let supcategory of supcategories){
+        //         if(supcategory.name != supcategories[0].name){
+        //             str += `<option class='c-item'>${supcategory.name}</option>`;
+        //         }
+               
+        //     }
+        //     selector.innerHTML = str;
+        // }
+    }
 
     render(selector, categories){
         console.log(selector);
@@ -102,7 +130,7 @@ export default class Allcategories{
                                             <option class='all-cate' value = '0'>`;
                                                 str+=this.arrayCategoriesLangs.allcategories;
                                             str += `</option>`;
-                                            str += this.renderCategory(this.categories);
+                                            str += this.renderBigCategory(this.categories);
                                 // for(let category of categories){
                                 //     console.log(category);
                                 //     str += `<optgroup class='cate-item-head' label='${category[this.categoryName]}' id='${category.id}'></optgroup>`;
@@ -137,7 +165,7 @@ export default class Allcategories{
         console.log(selector);
         if(selector != null){
             let formEl = selector.querySelector('.header-search form');
-           
+            console.log(formEl);
             formEl.addEventListener('submit', (evt)=>{
                 evt.preventDefault();
                 let inputEl = formEl.querySelector('input');

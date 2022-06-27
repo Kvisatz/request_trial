@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 20 2022 г., 15:11
--- Версия сервера: 8.0.24
+-- Время создания: Июн 27 2022 г., 22:52
+-- Версия сервера: 10.5.11-MariaDB
 -- Версия PHP: 7.1.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -28,16 +28,16 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `big_categories` (
-  `id` int NOT NULL,
-  `name` varchar(50) NOT NULL,
+  `id` int(11) NOT NULL,
+  `name_eng` varchar(50) NOT NULL,
   `name_rus` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `big_categories`
 --
 
-INSERT INTO `big_categories` (`id`, `name`, `name_rus`) VALUES
+INSERT INTO `big_categories` (`id`, `name_eng`, `name_rus`) VALUES
 (1, 'Cameras & Photography', 'Камеры и фотоаппараты'),
 (2, 'Laptop & Computer', 'Лэптопы и компьютеры'),
 (3, 'Electronics', 'Электроника');
@@ -49,11 +49,11 @@ INSERT INTO `big_categories` (`id`, `name`, `name_rus`) VALUES
 --
 
 CREATE TABLE `products` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `sup_categ_id` int NOT NULL,
+  `sup_categ_id` int(11) NOT NULL,
   `image` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `products`
@@ -84,17 +84,17 @@ INSERT INTO `products` (`id`, `name`, `sup_categ_id`, `image`) VALUES
 --
 
 CREATE TABLE `sup_categories` (
-  `id` int NOT NULL,
-  `name` varchar(50) NOT NULL,
+  `id` int(11) NOT NULL,
+  `name_eng` varchar(50) NOT NULL,
   `name_rus` varchar(50) NOT NULL,
-  `big_categ_id` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `big_categ_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `sup_categories`
 --
 
-INSERT INTO `sup_categories` (`id`, `name`, `name_rus`, `big_categ_id`) VALUES
+INSERT INTO `sup_categories` (`id`, `name_eng`, `name_rus`, `big_categ_id`) VALUES
 (1, 'Handbags', 'Сумки', 1),
 (2, 'Blouses and T-shirts', 'Блузы и футболки', 1),
 (3, 'Clouthes', 'Одежда', 1),
@@ -138,19 +138,19 @@ ALTER TABLE `sup_categories`
 -- AUTO_INCREMENT для таблицы `big_categories`
 --
 ALTER TABLE `big_categories`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT для таблицы `sup_categories`
 --
 ALTER TABLE `sup_categories`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -160,13 +160,13 @@ ALTER TABLE `sup_categories`
 -- Ограничения внешнего ключа таблицы `products`
 --
 ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`sup_categ_id`) REFERENCES `sup_categories` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`sup_categ_id`) REFERENCES `sup_categories` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `sup_categories`
 --
 ALTER TABLE `sup_categories`
-  ADD CONSTRAINT `sup_categories_ibfk_1` FOREIGN KEY (`big_categ_id`) REFERENCES `big_categories` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `sup_categories_ibfk_1` FOREIGN KEY (`big_categ_id`) REFERENCES `big_categories` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

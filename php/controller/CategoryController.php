@@ -4,7 +4,10 @@ class CategoryController{
     
     public function selectAllCategory($lang){
         // echo 1;
+        $data = [];
         $db = new DB();
-        return $db->selectAllBigCategory($lang);
+        $data['sup_category'] = $db->selectAllSupCategory($lang);
+        $data['big_category'] = $db->selectAllBigCategory($lang);
+        return $data; 
     }
 }
