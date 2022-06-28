@@ -1935,25 +1935,15 @@
 		   <!-- END Modal -->
 		</div>
 		<!-- END QUICKVIEW PRODUCT -->
-		<script type="module">
-			import Request from "./js/modul js/Request.js";
-			let req = new Request(window.location.search);
-		</script>
+		
 		<script>
 			//console.log(window.location.search);
 			
 			let params = window.location.search;
-			// let params1 = params.slice(1);
-			// let paramsUrl = new URLSearchParams(window.location.search);
-			// paramsUrl.get('category');
-			// params = params.slice(1);
-			// console.log(paramsUrl.get('category') == 0);
-			// console.log(paramsUrl);
-			 let request = new XMLHttpRequest();
-		        request.open('POST', `http://localhost/web11-teamwork-js/php/obr.php${params}`);
+			let request = new XMLHttpRequest();
+		        request.open('POST', `http://localhost/request_trial/php/obr.php${params}`);
 		        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		        //console.log(request);
-		        
+		        console.log(request);
 		         request.addEventListener('load', ()=>{
 		            if(request.status == 200 && request.response != 'error'){
 		                let obj = JSON.parse(request.response);

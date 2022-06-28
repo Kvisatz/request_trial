@@ -3,8 +3,8 @@ import {Currency} from './modul_currency.js';
 import {WelcomeMess} from './modul_welcome_mess.js';
 import {Links} from './modul_links.js';
 import {ClientSupport} from './modul_client_support.js';
-import mass5 from "../TrialBackObjects.js";
-import massRus from "../TrialObjectsRus.js";
+// import mass5 from "../TrialBackObjects.js";
+// import massRus from "../TrialObjectsRus.js";
 import Allcategories from "../Allcategories.js";
 
 

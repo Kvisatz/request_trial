@@ -13,8 +13,8 @@ let arrayCategoriesLangs = [
     }
 ];
 //импорт классов категория, продукт
-import Category from "./Category.js";
-import Product from "./Product.js";
+// import Category from "./Category.js";
+// import Product from "./Product.js";
 export default class Allcategories{
     selector = '';
     //поле класса принимающее входящий массив обьектов с бэка
@@ -60,6 +60,7 @@ export default class Allcategories{
                 if(request.response != null){
                     this.categories = request.response;
                     this.render(this.selector, this.categories);
+                    this.search(this.selector);
                 }
             }
             else{
@@ -95,26 +96,10 @@ export default class Allcategories{
          for(let supcategory of categories.sup_category){
             if(supcategory.big_categ_id == id){
                 //console.log(supcategory);
-                str += `<option class='c-item' id='${supcategory.id}'>${supcategory[this.categoryName]}</option>`;
+                str += `<option class='c-item' value='${supcategory.id}'>${supcategory[this.categoryName]}</option>`;
             }
-            
-            // if(supcategory.name != categories.sup_category[0].t){
-            //     str += `<option class='c-item'>${supcategory.name}</option>`;
-            // }
         }
         return str;
-
-
-        // let str = `<option class='cate-item-title'>${supcategories[0].name}</option>`;
-            
-        //     for(let supcategory of supcategories){
-        //         if(supcategory.name != supcategories[0].name){
-        //             str += `<option class='c-item'>${supcategory.name}</option>`;
-        //         }
-               
-        //     }
-        //     selector.innerHTML = str;
-        // }
     }
 
     render(selector, categories){
@@ -171,7 +156,7 @@ export default class Allcategories{
                 let inputEl = formEl.querySelector('input');
                 console.log(inputEl.value);
                 //this.categorySelect();
-                location.href = `http://localhost/web11-teamwork-js/shop-list.html?category=${this.categorySelect()}&search=${inputEl.value}`;
+                location.href = `http://localhost/request_trial/shop-list.html?category_id=${this.categorySelect()}&search=${inputEl.value}`;
                 //location.href = `http://localhost/trial/shop-list.html?category=${this.categorySelect()}&search=${inputEl.value}`;
                 //document.querySelector('#result').scrollIntoView({block: "center", behavior: "smooth"});
                 inputEl.value = "";

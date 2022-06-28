@@ -1,5 +1,6 @@
 <?php 
-include_once 'controller/CategoryController.php';
+// include_once 'controller/CategoryController.php';
+// include_once 'controller/SearchController.php';
 class Controller{
     function __construct(){
        //print_r($_GET);
@@ -20,6 +21,13 @@ class Controller{
                 die();
             }
           } 
+          if(isset($_GET['category_id']) && isset($_GET['search']) && $_GET['search'] != null){
+            $categoryId = (int)$_GET['category_id'];
+            $search = $_GET['search'];
+            include_once 'controller/SearchController.php';
+            $searchController = new SearchController();
+            echo json_encode($searchController->search($categoryId, $search));
+          }
         }
         // else{
         //     header("location: ../test.html");

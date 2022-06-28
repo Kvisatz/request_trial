@@ -18,8 +18,8 @@
 			$this->connect = $connect;
 		}
 
-		public function select($tableName){
-			$sql = 'SELECT * FROM `'.$tableName.'`';
+		public function selectSearchProduct($categoryId, $search){
+			$sql = "SELECT name FROM `products` WHERE sup_categ_id = ".$categoryId." && LIKE '%".$search."%'";
 			$objQuery = $this->connect->query($sql);
 			return $this->convertData($objQuery);
 		}
