@@ -19,7 +19,13 @@
 		}
 
 		public function selectSearchProduct($categoryId, $search){
-			$sql = "SELECT name FROM `products` WHERE sup_categ_id = ".$categoryId." && LIKE '%".$search."%'";
+			if($categoryId == 0){
+				$sql = "SELECT name FROM `products` WHERE name LIKE '%".$search."%'";
+			}
+			else{
+				$sql = "SELECT name FROM `products` WHERE name LIKE '%".$search."%' && sup_categ_id = ".$categoryId."";
+			}
+			
 			$objQuery = $this->connect->query($sql);
 			return $this->convertData($objQuery);
 		}

@@ -22,11 +22,15 @@ class Controller{
             }
           } 
           if(isset($_GET['category_id']) && isset($_GET['search']) && $_GET['search'] != null){
+            //print_r($_GET);
             $categoryId = (int)$_GET['category_id'];
+            //print_r($categoryId);
             $search = $_GET['search'];
+            //print_r($search);
             include_once 'controller/SearchController.php';
             $searchController = new SearchController();
             echo json_encode($searchController->search($categoryId, $search));
+            
           }
         }
         // else{
